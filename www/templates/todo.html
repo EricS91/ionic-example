@@ -1,0 +1,88 @@
+<ion-view view-title="ToDo">
+	<ion-nav-buttons side="primary">
+		<button class="button button-icon" ng-click="openTaskModal()">
+			<i class="icon ion-compose"></i>
+		</button>
+	</ion-nav-buttons>
+	<ion-content ng-init="getTasks()" ng-cloak="">
+		<div class="list card" ng-repeat="task in filteredTasks = (tasks | filterTasks:false) | orderBy:&apos;title&apos;" id="todo-list">
+			<div class="item">
+				<strong>Title: <span ng-bind="task.title"></span></strong>
+				<p>
+					<span ng-bind="task.content"></span>
+				</p>
+			</div>
+			<div class="item item-divider tabs tabs-icon-only">
+				<span class="tab-item item-checkbox">
+				<label class="checkbox">
+					<input type="checkbox" ng-model="task.completed" ng-change="syncTasks()">
+				</label>
+			</span>
+				<a class="tab-item assertive" ng-click="removeTask(task)">
+					<i class="icon ion-android-close"></i>
+				</a>
+				<a class="tab-item" ng-click="editTask(task)">
+					<i class="icon ion-edit"></i>
+				</a>
+			</div>
+		</div>
+		<p class="padding" ng-hide="filteredTasks.length || tasks.length === 0">No more tasks.</p>
+		<div class="list card" ng-repeat="task in filteredCompletedTasks = (tasks | filterTasks:true) | orderBy: &apos;title&apos;"
+		id="completed-list">
+			<div class="item">
+				<strong>Title: <span ng-bind="task.title"></span></strong>
+				<p>
+					<span ng-bind="task.content"></span>
+				</p>
+			</div>
+			<div class="item tabs tabs-icon-only">
+				<span class="tab-item item-checkbox">
+				<label class="checkbox">
+					<input type="checkbox" ng-model="task.completed" ng-change="syncTasks()">
+				</label>
+			</span>
+				<a class="tab-item assertive" ng-click="removeTask(task)">
+					<i class="icon ion-android-close"></i>
+				</a>
+				<a class="tab-item" ng-click="editTask(task)">
+					<i class="icon ion-edit"></i>
+				</a>
+			</div>
+		</div>
+
+		<script id="new-task-modal.html" type="text/ng-template">
+			<ion-modal-view>
+				<ion-header-bar class="bar-dark">
+					<h1 class="title">{{modalMessages.title}}</h1>
+					<button class="button button-icon" ng-click="closeTaskModal()">
+						<i class="icon ion-android-close"></i>
+					</button>
+				</ion-header-bar>
+				<ion-content>
+					<form ng-submit="createTask()">
+						<div class="list list-inset">
+							<label class="item item-input">
+								<input ng-model="task.title" type="text" placeholder="Task Title" />
+							</label>
+							<label class="item item-input">
+								<textarea ng-model="task.content" rows="5" placeholder="Task Content"></textarea>
+							</label>
+							<ul class="list">
+								<li class="item item-toggle">
+									Completed?
+									<label class="toggle toggle-balanced">
+										<input type="checkbox" ng-model="task.completed">
+										<div class="track">
+											<div class="handle"></div>
+										</div>
+									</label>
+								</li>
+							</ul>
+							<button type="submit" class="button button-block button-positive">{{modalMessages.submit}}</button>
+						</div>
+					</form>
+				</ion-content>
+			</ion-modal-view>
+		</script>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,49 @@
+.nav-bar-container .bar {
+	border: none;
+}
+
+.icon.ion-edit:before {
+	font-size: 1.5em !important;
+}
+
+.scroll {
+	height: 100%;
+}
+
+#profile-header {
+	height: 30%;
+	width: 100%;
+	display: inline-block;
+}
+
+#profile-header .header-background {
+	border-bottom: 1px solid #ddd;
+	height: 70%;
+	display: block;
+}
+
+#profile-header .profile-image {
+	margin: -3.5em auto 0 auto;
+	width: 100px;
+	height: 100px;
+}
+
+#profile-header .profile-image img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50px;
+	display: inline-block;
+}
+
+#profile-header h3 {
+	margin-top: 0;
+}
+
+#profile-header .profile-description {
+	display: block;
+}
+
+#profile-info {
+	border-top: 1px solid #ddd;
+	margin-top: 10px;
+}

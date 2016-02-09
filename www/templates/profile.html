@@ -1,5 +1,35 @@
 <ion-view view-title="Profile">
-	<ion-content class="padding">
-		<p>Profile Content</p>
+	<ion-nav-buttons side="secondary">
+		<button class="button button-icon" ng-click="editPerson()">
+			<i class="icon ion-edit"></i>
+		</button>
+	</ion-nav-buttons>
+	<ion-content>
+		<div id="profile-header">
+			<div class="header-background positive-bg"></div>
+			<div class="profile-image">
+				<img src="../img/blank-profile.png" />
+			</div>
+			<h3 class="text-center">{{person.fullName}}</h3>
+			<span class="profile-description text-center">Test Description</span>
+		</div>
+		<ul id="profile-info" class="list">
+			<li class="item item-borderless">
+				<label>Telephone:</label>
+				<span>{{person.telephone | tel}}</span>
+			</li>
+			<li class="item item-borderless">
+				<label>Telephone:</label>
+				<span>{{person.telephone | tel}}</span>
+			</li>
+			<li class="item item-borderless">
+				<label>Telephone:</label>
+				<span>{{person.telephone | tel}}</span>
+			</li>
+			<li class="item item-borderless">
+				<label>Telephone:</label>
+				<span>{{person.telephone | tel}}</span>
+			</li>
+		</ul>
 	</ion-content>
 </ion-view>

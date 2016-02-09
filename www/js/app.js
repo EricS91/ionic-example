@@ -62,7 +62,7 @@ angular.module('ionicApp', ['ionic', 'LocalStorageModule'])
 				}
 			});
 
-		$urlRouterProvider.otherwise("/nav/home");
+		$urlRouterProvider.otherwise("/nav/profile");
 	})
 	.run(function ($ionicPlatform) {
 		$ionicPlatform.ready(function () {

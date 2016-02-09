@@ -5,7 +5,7 @@
 		</button>
 	</ion-nav-buttons>
 	<ion-content ng-init="getTasks()" ng-cloak="">
-		<div class="list card" ng-repeat="task in filteredTasks = (tasks | filterTasks:false) | orderBy:&apos;title&apos;" id="todo-list">
+		<div class="list card" ng-repeat="task in tasks.todo | orderBy:'title'" id="todo-list">
 			<div class="item">
 				<strong>Title: <span ng-bind="task.title"></span></strong>
 				<p>
@@ -15,7 +15,7 @@
 			<div class="item item-divider tabs tabs-icon-only">
 				<span class="tab-item item-checkbox">
 				<label class="checkbox">
-					<input type="checkbox" ng-model="task.completed" ng-change="syncTasks()">
+					<input type="checkbox" ng-model="task.completed" ng-change="completeTask(task)">
 				</label>
 			</span>
 				<a class="tab-item assertive" ng-click="removeTask(task)">
@@ -26,19 +26,19 @@
 				</a>
 			</div>
 		</div>
-		<p class="padding" ng-hide="filteredTasks.length || tasks.length === 0">No more tasks.</p>
-		<div class="list card" ng-repeat="task in filteredCompletedTasks = (tasks | filterTasks:true) | orderBy: &apos;title&apos;"
-		id="completed-list">
+		<p class="padding" ng-hide="tasks.todo.length > 0">No more tasks.</p>
+		<div class="list card" ng-repeat="task in tasks.completed | orderBy: 'title'"
+		id="completed-tasks">
 			<div class="item">
 				<strong>Title: <span ng-bind="task.title"></span></strong>
 				<p>
 					<span ng-bind="task.content"></span>
 				</p>
 			</div>
-			<div class="item tabs tabs-icon-only">
+			<div class="item item-divider tabs tabs-icon-only">
 				<span class="tab-item item-checkbox">
 				<label class="checkbox">
-					<input type="checkbox" ng-model="task.completed" ng-change="syncTasks()">
+					<input type="checkbox" ng-model="task.completed" ng-change="completeTask(task)">
 				</label>
 			</span>
 				<a class="tab-item assertive" ng-click="removeTask(task)">

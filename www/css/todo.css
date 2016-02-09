@@ -1,0 +1,25 @@
+#completed-tasks .item {
+	background-color: #eee;
+	text-decoration: line-through;
+}
+
+.item-divider .icon {
+    font-size: 2em !important;
+    height: 100%;
+}
+
+.item-divider .icon:before {
+    vertical-align: middle;
+}
+
+.item-checkbox {
+    padding-left: 0;
+}
+
+.item-checkbox .checkbox {
+    position: relative;
+    top: 0;
+    margin: 0 auto;
+    padding: 0;
+    vertical-align: middle;
+}

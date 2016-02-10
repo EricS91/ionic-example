@@ -9,7 +9,10 @@ angular.module("ionicApp")
 		firstName: "First",
 		lastName: "Last",
 		fullName: "First Last",
-		telephone: "1234567890"
+		telephone: "1234567890",
+		email: "test@email.com",
+		username: "test@email.com",
+		fax: "1234567890"
 	}
 }).filter('tel', function () {
     return function (tel) {

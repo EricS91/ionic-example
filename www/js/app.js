@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('ionicApp', ['ionic', 'LocalStorageModule'])
+angular.module('ionicApp', ['ionic', 'LocalStorageModule', 'helpers'])
 	.config(function ($stateProvider, $urlRouterProvider) {
 		$stateProvider.
 			state('menu', {
@@ -60,6 +60,14 @@ angular.module('ionicApp', ['ionic', 'LocalStorageModule'])
 						controller: "settingsController"
 					}
 				}
+			}).state("menu.profileEdit", {
+				url: "/profile/edit",
+				views: {
+					"menuContent": {
+						templateUrl: "templates/editProfile.html",
+						controller: "accountController"
+					}
+				}
 			});
 
 		$urlRouterProvider.otherwise("/nav/profile");
@@ -85,4 +93,14 @@ angular.module('ionicApp', ['ionic', 'LocalStorageModule'])
 		$scope.toggleLeft = function () {
 			$ionicSideMenuDelegate.toggleLeft();
 		};
+		
+		/*$scope.person = {
+			firstName: "First",
+			lastName: "Last",
+			fullName: "First Last",
+			telephone: "1234567890",
+			email: "test@email.com",
+			username: "test@email.com",
+			fax: "1234567890"
+		};*/
 	});

@@ -1,60 +1,58 @@
 angular.module("ionicApp")
-.factory("accountService", function() {
-	// get/set account info
-	// authentication
-	// list of users
-})
-.controller("accountController", function($scope) {
-	$scope.person = { 
-		firstName: "First",
-		lastName: "Last",
-		fullName: "First Last",
-		telephone: "1234567890",
-		email: "test@email.com",
-		username: "test@email.com",
-		fax: "1234567890"
-	}
-}).filter('tel', function () {
-    return function (tel) {
-        if (!tel) { return ''; }
+	.factory("accountService", ["localStorageService", function (localStorageService) {
+		// get/set account info
+		// authentication
+		// list of users
+		var userList;
 
-        var value = tel.toString().trim().replace(/^\+/, '');
+		function getUser(userId) {
+			if(!userList) {
+				userList = localStorageService.get("user-list") || [];
+			}
+			
+			if (userList[userId]) {
+				return angular.copy(userList[userId] || {});
+			};
 
-        if (value.match(/[^0-9]/)) {
-            return tel;
-        }
+			return {};
+		};
 
-        var country, city, number;
+		function updateUser(userId, model) {
+			userList[userId] = model;
+			syncTasks();
+		};
+		
+		/**
+		 * Syncs tasks to localstorage 
+		 */
+		function syncTasks() {
+			localStorageService.set("user-list", userList);
+		}
 
-        switch (value.length) {
-            case 10: // +1PPP####### -> C (PPP) ###-####
-                country = 1;
-                city = value.slice(0, 3);
-                number = value.slice(3);
-                break;
+		return {
+			getUser: getUser,
+			updateUser: updateUser
+		}
+	}])
+	.controller("accountController", ["$scope", "$ionicHistory", "accountService", function ($scope, $ionicHistory, accountService) {
+		$scope.myGoBack = function () {
+			$ionicHistory.goBack();
+		};
 
-            case 11: // +CPPP####### -> CCC (PP) ###-####
-                country = value[0];
-                city = value.slice(1, 4);
-                number = value.slice(4);
-                break;
+		$scope.saveChanges = function () {
+			accountService.updateUser('1', angular.copy($scope.person));
 
-            case 12: // +CCCPP####### -> CCC (PP) ###-####
-                country = value.slice(0, 3);
-                city = value.slice(3, 5);
-                number = value.slice(5);
-                break;
+			$ionicHistory.goBack();
+		};
 
-            default:
-                return tel;
-        }
+		$scope.cancelChanges = function () {
+			$scope.person = {};
+			$ionicHistory.goBack();
+		};
 
-        if (country == 1) {
-            country = "";
-        }
-
-        number = number.slice(0, 3) + '-' + number.slice(3);
-
-        return (country + " (" + city + ") " + number).trim();
-    };
-});
+		$scope.$on("$ionicView.enter", function (test) {
+			console.log(test);
+			//Here your view content is fully loaded !!
+			$scope.person = accountService.getUser('1');
+		});
+	}]);

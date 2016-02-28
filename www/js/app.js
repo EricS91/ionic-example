@@ -36,14 +36,6 @@ angular.module('ionicApp', ['ionic', 'LocalStorageModule', 'helpers'])
 						controller: "otherController"
 					}
 				}
-			}).state("menu.profile", { // page for practice designing a page. Ability to edit (use of forms). Maybe Authentication
-				url: "/profile",
-				views: {
-					"menuContent": {
-						templateUrl: "templates/profile.html",
-						controller: "accountController"
-					}
-				}
 			}).state("menu.products", { // Page with grids and bottom navigation
 				url: "/products",
 				views: {
@@ -58,6 +50,14 @@ angular.module('ionicApp', ['ionic', 'LocalStorageModule', 'helpers'])
 					"menuContent": {
 						templateUrl: "templates/settings.html",
 						controller: "settingsController"
+					}
+				}
+			}).state("menu.profile", { // page for practice designing a page. Ability to edit (use of forms). Maybe Authentication
+				url: "/profile",
+				views: {
+					"menuContent": {
+						templateUrl: "templates/profile.html",
+						controller: "accountController"
 					}
 				}
 			}).state("menu.profileEdit", {
